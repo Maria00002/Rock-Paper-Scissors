@@ -1,3 +1,8 @@
+// This is Project: Rock Paper Scissors 
+// This game is played entirely in the console. Press F12 to get there 
+
+
+
 let humanScore = 0;
 let computerScore = 0;
 
