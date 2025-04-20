@@ -50,7 +50,7 @@ function playRound(humanChoice, computerChoice){
     if (humanChoiceLowerCase === "rock" && computerChoice === "rock" ||
         humanChoiceLowerCase === "paper" && computerChoice === "paper" ||
         humanChoiceLowerCase === "scissors" && computerChoice === "scissors") {
-            console.log("No one wins. " + humanChoiceLowerCase +" does not beat " +computerChoice);
+            console.log("No one wins. " + humanChoiceLowerCase.charAt(0).toUpperCase() + humanChoiceLowerCase.slice(1) +" does not beat " +computerChoice);
             return noOneWins;
     }
     else if (humanChoiceLowerCase === "rock" && computerChoice === "scissors" ||
@@ -72,4 +72,6 @@ function playRound(humanChoice, computerChoice){
 const humanSelection = getHumanChoice();
 const computerSelection = getComputerChoice();
 
+
 playRound(humanSelection, computerSelection);
+
