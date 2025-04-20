@@ -1,6 +1,11 @@
 // This is Project: Rock Paper Scissors 
 // This game is played entirely in the console. Press F12 to get there 
 
+// Declare the players score variables
+// Your game will keep track of the players score. 
+let humanScore = 0;
+let computerScore = 0;
+
 // getComputerChoce will randomly return one of the followings: 
 // rock, paper, scissors
 function getComputerChoice(){
@@ -27,19 +32,44 @@ function getHumanChoice(){
     return input;
 }
 
-// Declare the players score variables
-// Your game will keep track of the players score. 
-let humanScore = 0;
-let computerScore = 0;
+// Write the logic to play a single round
+// takes the human and computer player choices as arguments 
+// play a single round, increments the round winner's score 
+// and logs a winner annoucement 
 
 
-// function playRound(humanChoice, computerChoice){
-//     let humanChoiceLowerCase = humanChoice.toLowerCase();
-//     If ()
+function playRound(humanChoice, computerChoice){
+    let humanChoiceLowerCase = humanChoice.toLowerCase();
+    let humanWins = true;
+    let computerWins = true;
+    let noOneWins = true;
 
-// }
+    // Write out the logic of who wins
+    // Write the winning score to console.log a string value representing the round winner
+    // Increment the humanScore or computerScore varaibles based on the round wintner
+    if (humanChoiceLowerCase === "rock" && computerChoice === "rock" ||
+        humanChoiceLowerCase === "paper" && computerChoice === "paper" ||
+        humanChoiceLowerCase === "scissors" && computerChoice === "scissors") {
+            console.log("No one wins. " + humanChoiceLowerCase +" does not beat " +computerChoice);
+            return noOneWins;
+    }
+    else if (humanChoiceLowerCase === "rock" && computerChoice === "scissors" ||
+        humanChoiceLowerCase === "paper" && computerChoice === "rock" ||
+        humanChoiceLowerCase === "scissors" && computerChoice === "paper"){
+            console.log("You win! " + humanChoiceLowerCase.charAt(0).toUpperCase() + humanChoiceLowerCase.slice(1) + " beats " + computerChoice);
+            humanScore ++;
+            return humanWins;
 
-// const humanSelection = getHumanChoice();
-// const computerSelection = getComputerChoice();
+    }
+    else {
+        console.log("You lose! " + computerChoice.charAt(0).toUpperCase()+computerChoice.slice(1) + " beats " +humanChoiceLowerCase);
+        computerScore ++;
+        return computerWins;
+    }
 
-// playRound(humanSelection, computerSelection);
+}
+
+const humanSelection = getHumanChoice();
+const computerSelection = getComputerChoice();
+
+playRound(humanSelection, computerSelection);
