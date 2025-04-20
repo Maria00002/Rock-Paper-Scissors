@@ -1,23 +1,16 @@
 // This is Project: Rock Paper Scissors 
 // This game is played entirely in the console. Press F12 to get there 
 
-// Declare the players score variables
-// Your game will keep track of the players score. 
-let humanScore = 0;
-let computerScore = 0;
-
 // getComputerChoce will randomly return one of the followings: 
 // rock, paper, scissors
-function getComputerChoice(){
+function getComputerChoice() { 
     let number = Math.random();
     let output;
-    if (number < (1/3)){
+    if (number < (1/3)) { 
         output = "rock";
-    }
-    else if (number>=(1/3)&& number<(2/3)){
+    } else if (number >= (1/3) && number < (2/3)) { 
         output = "paper";
-    }
-    else {
+    } else {
         output = "scissors";
     }
     console.log("Computer has entered: "+output);
@@ -26,7 +19,7 @@ function getComputerChoice(){
 // getHumanChoice will return one of the valid choices depending on what 
 // the user inputs. Do not need to handle reprompting if the user enters 
 // an invalid input  
-function getHumanChoice(){
+function getHumanChoice() { 
     let input = prompt("The player please enter rock/paper/scissors: ","");
     console.log("The player has entered: " + input);
     return input;
@@ -38,11 +31,8 @@ function getHumanChoice(){
 // and logs a winner annoucement 
 
 
-function playRound(humanChoice, computerChoice){
+function playRound(humanChoice, computerChoice) { 
     let humanChoiceLowerCase = humanChoice.toLowerCase();
-    let humanWins = true;
-    let computerWins = true;
-    let noOneWins = true;
 
     // Write out the logic of who wins
     // Write the winning score to console.log a string value representing the round winner
@@ -51,31 +41,53 @@ function playRound(humanChoice, computerChoice){
         humanChoiceLowerCase === "paper" && computerChoice === "paper" ||
         humanChoiceLowerCase === "scissors" && computerChoice === "scissors") {
             console.log("No one wins. " + humanChoiceLowerCase.charAt(0).toUpperCase() + humanChoiceLowerCase.slice(1) +" does not beat " +computerChoice);
-            return noOneWins;
-    }
-    else if (humanChoiceLowerCase === "rock" && computerChoice === "scissors" ||
+            return 0;
+    } else if (humanChoiceLowerCase === "rock" && computerChoice === "scissors" ||
         humanChoiceLowerCase === "paper" && computerChoice === "rock" ||
-        humanChoiceLowerCase === "scissors" && computerChoice === "paper"){
+        humanChoiceLowerCase === "scissors" && computerChoice === "paper") { 
             console.log("You win! " + humanChoiceLowerCase.charAt(0).toUpperCase() + humanChoiceLowerCase.slice(1) + " beats " + computerChoice);
-            humanScore ++;
-            console.log("Human score is " +humanScore);
-            console.log("Computer score is " +computerScore);
-            return humanWins;
+            // humanScore ++;
+            // console.log("Human score is " +humanScore);//to test if the scores are implemented correctly
+            // console.log("Computer score is " +computerScore);
+            return 1;
 
-    }
-    else {
+    } else {
         console.log("You lose! " + computerChoice.charAt(0).toUpperCase()+computerChoice.slice(1) + " beats " +humanChoiceLowerCase);
-        computerScore ++;
-        console.log("Human score is " +humanScore);
-        console.log("Computer score is " +computerScore);
-        return computerWins;
+        // computerScore ++;
+        // console.log("Human score is " +humanScore); //to test if the scores are implemented correctly
+        // console.log("Computer score is " +computerScore);
+        return -1;
     }
 
 }
 
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
+
+// Step 6: Write the logic to play the entire game
+// The game will play 5 rounds. 
+// Keep track of the scores and declares a winner at the end
+function playGame () { 
+    // Declare the players score variables
+    // Your game will keep track of the players score. 
+    let humanScore = 0;
+    let computerScore = 0;
+
+    for (let i = 0; i < 5; i++) {
+        console.log("Round " + (i+1));
+        const humanSelection = getHumanChoice();
+        const computerSelection = getComputerChoice();
+    
+        let score = playRound(humanSelection, computerSelection); //1 if human wins and -1 if computer wins
+        if (score == 1) {
+            humanScore++;
+        } else if (score == -1) { 
+            computerScore++; 
+        }
+        console.log("Human score is " + humanScore + ". Computer score is " + computerScore + ".");   
+        console.log("");
+    }
+}
+
+playGame();
 
 
-playRound(humanSelection, computerSelection);
 
