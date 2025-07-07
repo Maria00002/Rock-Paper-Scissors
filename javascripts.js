@@ -46,16 +46,10 @@ function playRound(humanChoice, computerChoice) {
         humanChoiceLowerCase === "paper" && computerChoice === "rock" ||
         humanChoiceLowerCase === "scissors" && computerChoice === "paper") { 
             console.log("You win! " + humanChoiceLowerCase.charAt(0).toUpperCase() + humanChoiceLowerCase.slice(1) + " beats " + computerChoice);
-            // humanScore ++;
-            // console.log("Human score is " +humanScore);//to test if the scores are implemented correctly
-            // console.log("Computer score is " +computerScore);
             return 1;
 
     } else {
         console.log("You lose! " + computerChoice.charAt(0).toUpperCase()+computerChoice.slice(1) + " beats " +humanChoiceLowerCase);
-        // computerScore ++;
-        // console.log("Human score is " +humanScore); //to test if the scores are implemented correctly
-        // console.log("Computer score is " +computerScore);
         return -1;
     }
 
@@ -65,29 +59,27 @@ function playRound(humanChoice, computerChoice) {
 // Step 6: Write the logic to play the entire game
 // The game will play 5 rounds. 
 // Keep track of the scores and declares a winner at the end
-function playGame () { 
-    // Declare the players score variables
-    // Your game will keep track of the players score. 
-    let humanScore = 0;
-    let computerScore = 0;
+// function playGame () { 
+//     let humanScore = 0;
+//     let computerScore = 0;
 
-    for (let i = 0; i < 5; i++) {
-        console.log("Round " + (i+1));
-        const humanSelection = getHumanChoice();
-        const computerSelection = getComputerChoice();
+//     for (let i = 0; i < 5; i++) {
+//         console.log("Round " + (i+1));
+//         const humanSelection = getHumanChoice();
+//         const computerSelection = getComputerChoice();
     
-        let score = playRound(humanSelection, computerSelection); //1 if human wins and -1 if computer wins
-        if (score == 1) {
-            humanScore++;
-        } else if (score == -1) { 
-            computerScore++; 
-        }
-        console.log("Human score is " + humanScore + ". Computer score is " + computerScore + ".");   
-        console.log("");
-    }
-}
+//         let score = playRound(humanSelection, computerSelection); //1 if human wins and -1 if computer wins
+//         if (score == 1) {
+//             humanScore++;
+//         } else if (score == -1) { 
+//             computerScore++; 
+//         }
+//         console.log("Human score is " + humanScore + ". Computer score is " + computerScore + ".");   
+//         console.log("");
+//     }
+// }
 
-playGame();
+// playGame();
 
 
 
