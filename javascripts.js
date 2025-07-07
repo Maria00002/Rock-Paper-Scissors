@@ -80,6 +80,6 @@ function playRound(humanChoice, computerChoice) {
 // }
 
 // playGame();
-
+// Add an event listener to the buttons
 
 
