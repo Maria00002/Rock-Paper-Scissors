@@ -1,8 +1,3 @@
-// This is Project: Rock Paper Scissors 
-// This game is played entirely in the console. Press F12 to get there 
-
-// getComputerChoce will randomly return one of the followings: 
-// rock, paper, scissors
 function getComputerChoice() { 
     let number = Math.random();
     let output;
@@ -16,27 +11,18 @@ function getComputerChoice() {
     console.log("Computer has entered: "+output);
     return output;
 }
-// getHumanChoice will return one of the valid choices depending on what 
-// the user inputs. Do not need to handle reprompting if the user enters 
-// an invalid input  
-function getHumanChoice() { 
-    let input = prompt("The player please enter rock/paper/scissors: ","");
+
+function getHumanChoice(input) { 
+    // let input = prompt("The player please enter rock/paper/scissors: ","");
     console.log("The player has entered: " + input);
     return input;
 }
-
-// Write the logic to play a single round
-// takes the human and computer player choices as arguments 
-// play a single round, increments the round winner's score 
-// and logs a winner annoucement 
 
 
 function playRound(humanChoice, computerChoice) { 
     let humanChoiceLowerCase = humanChoice.toLowerCase();
 
-    // Write out the logic of who wins
-    // Write the winning score to console.log a string value representing the round winner
-    // Increment the humanScore or computerScore varaibles based on the round wintner
+
     if (humanChoiceLowerCase === "rock" && computerChoice === "rock" ||
         humanChoiceLowerCase === "paper" && computerChoice === "paper" ||
         humanChoiceLowerCase === "scissors" && computerChoice === "scissors") {
@@ -54,6 +40,45 @@ function playRound(humanChoice, computerChoice) {
     }
 
 }
+
+
+
+// playGame();
+// Add an event listener to the buttons that call your playRound function 
+// with the correct playerSelection every time a button is clicked
+
+const buttons = document.querySelectorAll("button");
+
+// try to display the correct button id
+// working 
+// buttons.forEach((button) => {
+//     button.addEventListener("click", ()=> {
+//     getHumanChoice(button.id);
+//     });
+// });
+
+// working
+// buttons.forEach((button) => {
+//     button.addEventListener("click", function() {
+//         getHumanChoice(button.id);
+//     });
+// });
+
+
+buttons.forEach((button) => {
+    button.addEventListener("click", function() {
+        playRound(getHumanChoice(button.id), getComputerChoice());
+    });
+});
+
+
+
+
+
+
+
+
+
 
 
 // Step 6: Write the logic to play the entire game
@@ -78,8 +103,3 @@ function playRound(humanChoice, computerChoice) {
 //         console.log("");
 //     }
 // }
-
-// playGame();
-// Add an event listener to the buttons
-
-
