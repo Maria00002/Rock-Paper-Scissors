@@ -8,37 +8,47 @@ function getComputerChoice() {
     } else {
         output = "scissors";
     }
-    console.log("Computer has entered: "+output);
+    // console.log("Computer has entered: "+output);
     return output;
 }
 
 function getHumanChoice(input) { 
     // let input = prompt("The player please enter rock/paper/scissors: ","");
-    console.log("The player has entered: " + input);
+    // console.log("The player has entered: " + input);
     return input;
 }
 
 
 function playRound(humanChoice, computerChoice) { 
     let humanChoiceLowerCase = humanChoice.toLowerCase();
+    console.log(humanChoice);
+    console.log(computerChoice);
 
-
+    const div = document.createElement("div");
+    const body = document.querySelector("body");
+    div.setAttribute("style","white-space: pre;");
+    div.textContent = `\r\nPlayer has entered: ${humanChoiceLowerCase}. \r\n`;
+    div.textContent += `Computer has entered: ${computerChoice}.\r\n`;
+    
     if (humanChoiceLowerCase === "rock" && computerChoice === "rock" ||
         humanChoiceLowerCase === "paper" && computerChoice === "paper" ||
         humanChoiceLowerCase === "scissors" && computerChoice === "scissors") {
-            console.log("No one wins. " + humanChoiceLowerCase.charAt(0).toUpperCase() + humanChoiceLowerCase.slice(1) +" does not beat " +computerChoice);
-            return 0;
+            div.textContent += "No one wins. " + humanChoiceLowerCase.charAt(0).toUpperCase() + humanChoiceLowerCase.slice(1) +" does not beat " +computerChoice +".";
+            // console.log("No one wins. " + humanChoiceLowerCase.charAt(0).toUpperCase() + humanChoiceLowerCase.slice(1) +" does not beat " +computerChoice);
+            // return 0;
     } else if (humanChoiceLowerCase === "rock" && computerChoice === "scissors" ||
         humanChoiceLowerCase === "paper" && computerChoice === "rock" ||
         humanChoiceLowerCase === "scissors" && computerChoice === "paper") { 
-            console.log("You win! " + humanChoiceLowerCase.charAt(0).toUpperCase() + humanChoiceLowerCase.slice(1) + " beats " + computerChoice);
-            return 1;
+            div.textContent += "You win! " + humanChoiceLowerCase.charAt(0).toUpperCase() + humanChoiceLowerCase.slice(1) + " beats " + computerChoice +".";
+            // console.log("You win! " + humanChoiceLowerCase.charAt(0).toUpperCase() + humanChoiceLowerCase.slice(1) + " beats " + computerChoice);
+            // return 1;
 
     } else {
-        console.log("You lose! " + computerChoice.charAt(0).toUpperCase()+computerChoice.slice(1) + " beats " +humanChoiceLowerCase);
-        return -1;
+        div.textContent += "You lose! " + computerChoice.charAt(0).toUpperCase()+computerChoice.slice(1) + " beats " +humanChoiceLowerCase +".";
+        // console.log("You lose! " + computerChoice.charAt(0).toUpperCase()+computerChoice.slice(1) + " beats " +humanChoiceLowerCase);
+        // return -1;
     }
-
+    body.appendChild(div);
 }
 
 
@@ -67,12 +77,17 @@ const buttons = document.querySelectorAll("button");
 
 buttons.forEach((button) => {
     button.addEventListener("click", function() {
+
+        // Add a div for displaying results and change all of your console.logs into DOM methods
+        
+
+
+
+
         playRound(getHumanChoice(button.id), getComputerChoice());
+        
     });
 });
-
-
-
 
 
 
