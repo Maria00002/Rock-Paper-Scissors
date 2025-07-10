@@ -8,13 +8,10 @@ function getComputerChoice() {
     } else {
         output = "scissors";
     }
-    // console.log("Computer has entered: "+output);
     return output;
 }
 
 function getHumanChoice(input) { 
-    // let input = prompt("The player please enter rock/paper/scissors: ","");
-    // console.log("The player has entered: " + input);
     return input;
 }
 
@@ -27,94 +24,77 @@ function playRound(humanChoice, computerChoice) {
     const div = document.createElement("div");
     const body = document.querySelector("body");
     div.setAttribute("style","white-space: pre;");
-    div.textContent = `\r\nPlayer has entered: ${humanChoiceLowerCase}. \r\n`;
+    div.textContent = `${newline}Player has entered: ${humanChoiceLowerCase}. \r\n`;
     div.textContent += `Computer has entered: ${computerChoice}.\r\n`;
     
     if (humanChoiceLowerCase === "rock" && computerChoice === "rock" ||
         humanChoiceLowerCase === "paper" && computerChoice === "paper" ||
         humanChoiceLowerCase === "scissors" && computerChoice === "scissors") {
             div.textContent += "No one wins. " + humanChoiceLowerCase.charAt(0).toUpperCase() + humanChoiceLowerCase.slice(1) +" does not beat " +computerChoice +".";
-            // console.log("No one wins. " + humanChoiceLowerCase.charAt(0).toUpperCase() + humanChoiceLowerCase.slice(1) +" does not beat " +computerChoice);
-            // return 0;
+            body.appendChild(div);
+            return 0;
     } else if (humanChoiceLowerCase === "rock" && computerChoice === "scissors" ||
         humanChoiceLowerCase === "paper" && computerChoice === "rock" ||
         humanChoiceLowerCase === "scissors" && computerChoice === "paper") { 
             div.textContent += "You win! " + humanChoiceLowerCase.charAt(0).toUpperCase() + humanChoiceLowerCase.slice(1) + " beats " + computerChoice +".";
-            // console.log("You win! " + humanChoiceLowerCase.charAt(0).toUpperCase() + humanChoiceLowerCase.slice(1) + " beats " + computerChoice);
-            // return 1;
-
+            body.appendChild(div);
+            return 1;
     } else {
         div.textContent += "You lose! " + computerChoice.charAt(0).toUpperCase()+computerChoice.slice(1) + " beats " +humanChoiceLowerCase +".";
-        // console.log("You lose! " + computerChoice.charAt(0).toUpperCase()+computerChoice.slice(1) + " beats " +humanChoiceLowerCase);
-        // return -1;
+        body.appendChild(div);
+        return -1;
     }
-    body.appendChild(div);
 }
 
+function printStartingScore() {
+    const startingScore = document.createElement("div");
+    const body = document.querySelector("body");
+    startingScore.setAttribute("style","white-space: pre;");
+    startingScore.textContent = `${newline}Human Score: ${humanScore} \xa0\xa0`;
+    startingScore.textContent += `Computer Score: ${computerScore}`;
+    body.appendChild(startingScore);
+}
 
-
-// playGame();
-// Add an event listener to the buttons that call your playRound function 
-// with the correct playerSelection every time a button is clicked
+function playGame (playRound) { 
+        let score = playRound(getHumanChoice(id), getComputerChoice()); //1 if human wins and -1 if computer wins
+        if (score == 1) {
+            humanScore++;
+        } else if (score == -1) { 
+            computerScore++; 
+        }
+}
 
 const buttons = document.querySelectorAll("button");
+let id = "";
+let humanScore = 0;
+let computerScore = 0;
+let newline = "\r\n";
 
-// try to display the correct button id
-// working 
-// buttons.forEach((button) => {
-//     button.addEventListener("click", ()=> {
-//     getHumanChoice(button.id);
-//     });
-// });
-
-// working
-// buttons.forEach((button) => {
-//     button.addEventListener("click", function() {
-//         getHumanChoice(button.id);
-//     });
-// });
+printStartingScore();
 
 
 buttons.forEach((button) => {
     button.addEventListener("click", function() {
+        id = button.id;
 
-        // Add a div for displaying results and change all of your console.logs into DOM methods
+        const score = document.createElement("div");
+        score.setAttribute("style","white-space: pre;");
+        const body = document.querySelector("body");
+        const announceWinner = document.createElement("div");
+        announceWinner.setAttribute("style","white-space: pre;");
+
+        if ((humanScore === 5) || (computerScore === 5)) {
+            let winner = (humanScore === 5) ? "player" : "computer";
+            announceWinner.textContent += `\r\nNo more Round. The Winner is ${winner}.`;
+            body.appendChild(announceWinner);
+        } else {
+            playGame(playRound);
+            score.textContent = `Human Score: ${humanScore} \xa0\xa0`;
+            score.textContent += `Computer Score: ${computerScore}`;
+            body.appendChild(score);
+        }
         
-
-
-
-
-        playRound(getHumanChoice(button.id), getComputerChoice());
-        
+     
     });
 });
 
-
-
-
-
-
-
-
-// Step 6: Write the logic to play the entire game
-// The game will play 5 rounds. 
-// Keep track of the scores and declares a winner at the end
-// function playGame () { 
-//     let humanScore = 0;
-//     let computerScore = 0;
-
-//     for (let i = 0; i < 5; i++) {
-//         console.log("Round " + (i+1));
-//         const humanSelection = getHumanChoice();
-//         const computerSelection = getComputerChoice();
-    
-//         let score = playRound(humanSelection, computerSelection); //1 if human wins and -1 if computer wins
-//         if (score == 1) {
-//             humanScore++;
-//         } else if (score == -1) { 
-//             computerScore++; 
-//         }
-//         console.log("Human score is " + humanScore + ". Computer score is " + computerScore + ".");   
-//         console.log("");
-//     }
-// }
