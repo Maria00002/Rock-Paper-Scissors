@@ -15,7 +15,6 @@ function getHumanChoice(input) {
     return input;
 }
 
-
 function playRound(humanChoice, computerChoice) { 
     let humanChoiceLowerCase = humanChoice.toLowerCase();
     console.log(humanChoice);
